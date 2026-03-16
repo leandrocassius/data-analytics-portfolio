@@ -102,7 +102,7 @@ To export the current DB tables to CSV so the exploratory notebook (and others) 
 python scripts/export_sample_data.py
 ```
 
-This writes `data/example/channels.csv`, `videos.csv`, `comments.csv`, `text_features.csv`, and `lineage_events.csv`. You can commit `data/example/` so that anyone who clones the repo can run the notebook with sample data. The notebook automatically uses these CSVs when present.
+This writes `data/example/channels.csv`, `videos.csv`, `comments.csv`, `text_features.csv`, and `lineage_events.csv`. The notebook automatically uses these CSVs when present.
 
 ## Sample analysis
 
