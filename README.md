@@ -10,6 +10,7 @@ A collection of data science and ML projects: classification, time series, and a
 | [Car Accident Severity](car-accident-severity/) | EDA and XGBoost model to predict US car accident severity; pipelines, encoding, scaling. | `XGBoost` · `classification` · `EDA` · `pipelines` |
 | [Algorithmic Trading](algorithmic-trading-moving-averages/) | Trend-reversal strategy using moving averages on NYSE data; backtest vs passive. | `time series` · `moving averages` · `pandas` |
 | [Store Performance with BigQuery](store-performance-bigquery/) | Google BigQuery + Google Analytics: traffic sources, conversions, trends. | `BigQuery` · `SQL` · `analytics` |
+| [YouTube Trends Data Pipeline](youtube-trends-pipeline/) | ETL pipeline: YouTube API → PostgreSQL, text preprocessing, sentiment, Airflow orchestration, lineage. | `PostgreSQL` · `Airflow` · `SQLAlchemy` · `NLP` · `ETL` |
 
 ## How to Run
 

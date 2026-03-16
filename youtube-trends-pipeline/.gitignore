@@ -1,0 +1,26 @@
+.env
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+env/
+*.egg-info/
+.eggs/
+dist/
+build/
+data/
+# Allow committed sample data for notebook / demos
+!data/example/
+!data/example/*
+*.db
+.airflow/
+.pytest_cache/
+.coverage
+htmlcov/
+.ruff_cache/
+.mypy_cache/
+*.log
+.DS_Store

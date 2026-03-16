@@ -1,0 +1,14 @@
+# YouTube API
+google-api-python-client>=2.100.0
+
+# Database
+sqlalchemy>=2.0.0
+psycopg2-binary>=2.9.0
+
+# Config
+python-dotenv>=1.0.0
+
+# NLP
+spacy>=3.7.0
+nltk>=3.8.0
+vaderSentiment>=3.3.2
