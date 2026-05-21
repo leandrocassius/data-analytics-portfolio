@@ -177,7 +177,3 @@ youtube-trends-pipeline/
 - **Multi-language** – Multilingual spaCy model and per-language sentiment.
 - **Production lineage** – OpenLineage or similar instead of a custom `lineage_events` table.
 - **Incremental loads** – Only fetch comments for new videos or since last run.
-
-## License
-
-MIT (or your choice).
