@@ -43,7 +43,7 @@ def remove_extra_whitespace(text: str) -> str:
     """Collapse multiple spaces/newlines to a single space and strip."""
     return " ".join(text.split())
 
-
+# TODO: refactor function, takeaway uneeeded arguments
 def clean_for_lemma(
     text: Optional[str],
     lowercase: bool = True,
