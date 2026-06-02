@@ -6,6 +6,7 @@ from .text_cleaning import clean_for_lemma
 
 _NLP = None
 
+# Note: en_core_web_sm must be pre-installed in the Docker image
 # FIXME: silent spacy download would break on worker nodes.
 # TODO: the function is verbose, can be shortened
 def _get_nlp():
