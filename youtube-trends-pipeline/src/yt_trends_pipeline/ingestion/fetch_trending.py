@@ -8,7 +8,7 @@ from typing import Any, Dict, List
 from ..config import get_settings
 from .youtube_client import YouTubeClient
 
-
+#TODO: eliminate redundancies on API key
 def fetch_trending_for_region(
     client: YouTubeClient,
     region_code: str,
