@@ -40,6 +40,7 @@ def fetch_comments_for_videos(
 
 
 def save_raw_comments(
+    # Fixme: too many paths
     data: Dict[str, List[Dict[str, Any]]],
     base_path: Path | None = None,
 ) -> Path:
