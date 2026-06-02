@@ -8,7 +8,7 @@ from typing import Any, Dict, List
 from ..config import get_settings
 from .youtube_client import YouTubeClient
 
-
+#Fixme: API key needlessly verbose (everywhere)
 def fetch_comments_for_video(
     client: YouTubeClient,
     video_id: str,
