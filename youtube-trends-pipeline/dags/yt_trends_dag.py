@@ -17,6 +17,8 @@ DEFAULT_ARGS = {
     "retry_delay": __import__("datetime").timedelta(minutes=2),
 }
 
+RAW_DATA_PATH = Path("/opt/airflow/data/raw")
+
 
 @dag(
     dag_id="yt_trends_dag",
@@ -31,17 +33,14 @@ def yt_trends_pipeline_dag():
 
     @task
     def fetch_trending_raw():
-        from yt_trends_pipeline.config import get_settings
         from yt_trends_pipeline.ingestion.fetch_trending import fetch_and_save_trending
-        settings = get_settings()
-        settings.ensure_raw_data_path()
-        paths = fetch_and_save_trending(base_path=Path("/opt/airflow/data/raw"))
+        paths = fetch_and_save_trending(base_path=RAW_DATA_PATH)
         return len(paths)
 
     @task
     def load_trending_to_db():
         from yt_trends_pipeline.ingestion.load_raw_to_db import run_load_trending
-        return run_load_trending(raw_dir=Path("/opt/airflow/data/raw"))
+        return run_load_trending(raw_dir=RAW_DATA_PATH)
 
     @task
     def fetch_comments_raw():
@@ -61,7 +60,7 @@ def yt_trends_pipeline_dag():
     @task
     def load_comments_to_db():
         from yt_trends_pipeline.ingestion.load_raw_to_db import run_load_comments
-        return run_load_comments(raw_dir=Path("/opt/airflow/data/raw"))
+        return run_load_comments(raw_dir=RAW_DATA_PATH)
 
     @task
     def build_text_features():

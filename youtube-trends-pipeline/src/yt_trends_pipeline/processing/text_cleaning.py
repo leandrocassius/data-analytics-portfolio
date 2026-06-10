@@ -23,49 +23,27 @@ _EMOJI_PATTERN = re.compile(
 # Keep only letters, numbers, and spaces (after cleaning)
 _ALPHANUM_SPACE = re.compile(r"[^a-z0-9\s]")
 
-
+# TODO: Transform into function for extracting urls
+# Currently not needed as alphanum already clears them  
 def remove_urls(text: str) -> str:
     """Replace URLs with a space to avoid joining words."""
     return _URL_PATTERN.sub(" ", text)
 
-
-def remove_emojis(text: str) -> str:
-    """Remove emoji and similar symbols."""
-    return _EMOJI_PATTERN.sub(" ", text)
-
-
-def to_lower(text: str) -> str:
-    """Lowercase for consistent tokenization."""
-    return text.lower()
-
+# TODO: Transform into function for extracting emojis
+# Currently not needed as alphanum already clears them
+#def remove_emojis(text: str) -> str:
+#    """Remove emoji and similar symbols."""
+#    return _EMOJI_PATTERN.sub(" ", text)
 
 def remove_extra_whitespace(text: str) -> str:
     """Collapse multiple spaces/newlines to a single space and strip."""
     return " ".join(text.split())
 
 # TODO: refactor function, takeaway uneeeded arguments
-def clean_for_lemma(
-    text: Optional[str],
-    lowercase: bool = True,
-    remove_urls_flag: bool = True,
-    remove_emoji: bool = True,
-    strip_non_alpha: bool = False,
-) -> str:
+def clean_for_lemma(text: str,) -> str:
     """
     Clean raw text before lemmatization. Returns a single string.
-    If strip_non_alpha is True, only letters and spaces are kept (for bag-of-words style).
+    Only letters and spaces are kept (for bag-of-words style).
     """
-    if not text or not isinstance(text, str):
-        return ""
-    t = text.strip()
-    if remove_urls_flag:
-        t = remove_urls(t)
-    if remove_emoji:
-        t = remove_emojis(t)
-    if lowercase:
-        t = to_lower(t)
-    t = remove_extra_whitespace(t)
-    if strip_non_alpha:
-        t = _ALPHANUM_SPACE.sub(" ", t)
-        t = remove_extra_whitespace(t)
-    return t
+    text = _ALPHANUM_SPACE.sub(" ", text.lower())  
+    return remove_extra_whitespace(text)   

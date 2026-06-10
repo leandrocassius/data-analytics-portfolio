@@ -8,33 +8,25 @@ from typing import Any, Dict, List
 from ..config import get_settings
 from .youtube_client import YouTubeClient
 
-#Fixme: API key needlessly verbose (everywhere)
+
 def fetch_comments_for_video(
     client: YouTubeClient,
-    video_id: str,
-    max_results: int = 50,
+    video_id: str
 ) -> List[Dict[str, Any]]:
     """Return list of commentThread resource dicts for the video."""
-    return client.get_video_comments(video_id, max_results=max_results)
+    return client.get_video_comments(video_id, max_results=50)
 
 
 def fetch_comments_for_videos(
-    video_ids: List[str],
-    api_key: str | None = None,
-    max_comments_per_video: int | None = None,
+    video_ids: List[str]
 ) -> Dict[str, List[Dict[str, Any]]]:
     """
     Fetch comments for each video. Returns dict mapping video_id -> list of commentThread dicts.
     """
-    settings = get_settings()
-    key = api_key or settings.youtube_api_key
-    if not key:
-        raise ValueError("YOUTUBE_API_KEY is required")
-    max_per = max_comments_per_video or settings.max_comments_per_video
-    client = YouTubeClient(api_key=key)
+    client = YouTubeClient()
     out: Dict[str, List[Dict[str, Any]]] = {}
     for vid in video_ids:
-        items = fetch_comments_for_video(client, vid, max_results=max_per)
+        items = fetch_comments_for_video(client, vid)
         out[vid] = items
     return out
 
@@ -58,12 +50,8 @@ def save_raw_comments(
 
 def fetch_and_save_comments(
     video_ids: List[str],
-    api_key: str | None = None,
-    max_comments_per_video: int | None = None,
     base_path: Path | None = None,
 ) -> Path:
     """Fetch comments for the given video IDs and save raw JSON. Returns path to saved file."""
-    data = fetch_comments_for_videos(
-        video_ids, api_key=api_key, max_comments_per_video=max_comments_per_video
-    )
+    data = fetch_comments_for_videos(video_ids)
     return save_raw_comments(data, base_path=base_path)

@@ -18,7 +18,6 @@ class Settings:
     """Application settings from environment variables."""
 
     def __init__(self) -> None:
-        self.youtube_api_key: str = os.getenv("YOUTUBE_API_KEY", "")
         self.database_url: str = os.getenv(
             "DATABASE_URL",
             "postgresql://yt_trends:yt_trends@localhost:5432/yt_trends",

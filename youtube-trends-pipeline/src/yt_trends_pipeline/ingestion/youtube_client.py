@@ -1,6 +1,8 @@
 """YouTube Data API v3 client with retry and rate limiting."""
 
 import time
+import os
+
 from typing import Any, Dict, List, Optional
 
 from googleapiclient.discovery import build
@@ -10,11 +12,13 @@ from googleapiclient.errors import HttpError
 class YouTubeClient:
     """Thin wrapper around the YouTube Data API with retry and backoff."""
 
-    def __init__(self, api_key: str, max_retries: int = 3, delay_seconds: float = 0.2) -> None:
-        self._api_key = api_key
+    def __init__(self, max_retries: int = 3, delay_seconds: float = 0.2) -> None:
+        self._api_key = os.getenv("YOUTUBE_API_KEY", "")
+        if not self._api_key:
+            raise ValueError("API Key not set in .env file!")
         self._max_retries = max_retries
         self._delay_seconds = delay_seconds
-        self._youtube = build("youtube", "v3", developerKey=api_key)
+        self._youtube = build("youtube", "v3", developerKey=self._api_key)
 
     def _request(self, method: str, **kwargs: Any) -> Dict[str, Any]:
         """Execute an API request with retries and rate limiting."""
